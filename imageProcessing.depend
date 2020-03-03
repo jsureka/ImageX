@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1581630780 source:c:\users\jitesh\google drive\codeforces\imageprocessing\main.cpp
+	<stdio.h>
+	<string.h>
+
+1581630852 source:c:\users\jitesh\google drive\codeforces\imageprocessing\readbmp.cpp
+	<stdio.h>
+	<string.h>
+
+1581630441 c:\users\jitesh\google drive\codeforces\imageprocessing\myheader.h
+	<stdio.h>
+	<string.h>
+
+1581580496 source:c:\users\jitesh sureka\desktop\imageprocessing\main.cpp
+	<stdio.h>
+	<string.h>
+
+1583130386 source:c:\users\jitesh sureka\desktop\imageprocessing\readbmp.cpp
+	<stdio.h>
+	<string.h>
+
