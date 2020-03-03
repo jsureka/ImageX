@@ -10,9 +10,10 @@ int main()
 {
     while(image==NULL)
 	{
-		printf("Error! Enter path again:");
+		printf("Enter Path :");
 		scanf("%s",ipath);
 		image=fopen(ipath,"rb+");
+		printf("Error! Enter path again\n\n");
 	}
 
 

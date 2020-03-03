@@ -51,17 +51,18 @@ void readbmp(FILE *image)
 	if(bih.bitdepth==8)
     {
         while(!feof(image))
-        {
+
+    {
 		//fread(&p,sizeof(p),1,image);
 		fread(&pixelData[i][j][RED],sizeof(pixelData[i][j][RED]),1,image);
 		//fread(&pixelData[i][GREEN],sizeof(pixelData[i][GREEN]),1,image);
 		//fread(&pixelData[i][BLUE],sizeof(pixelData[i][BLUE]),1,image);
 		//fread(&pixelData[i][ALPHA],sizeof(pixelData[ALPHA]),1,image);
 		//pic[i]=p;
-		printf(" %u= %d  ",count+54,pixelData[i][j][0]);
+		printf(" %u= %d  ",count,pixelData[i][j][0]);
         count++;
 		j++;
-		printf("\n%d %d\n",i,j);
+		printf("\n%u %u\n",i,j);
 		if(j==bih.width)
         {
             printf("\n");
