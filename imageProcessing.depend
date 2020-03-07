@@ -36,3 +36,20 @@
 
 1583384661 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
 
+1583599161 source:c:\users\jitesh\desktop\spl1\main.cpp
+	"myheader2.h"
+	<stdio.h>
+	<string.h>
+
+1583601175 c:\users\jitesh\desktop\spl1\myheader2.h
+
+1583601206 source:c:\users\jitesh\desktop\spl1\readbmp.cpp
+	"myheader2.h"
+	<stdio.h>
+	<string.h>
+
+1583600986 source:c:\users\jitesh\desktop\spl1\writebmp.cpp
+	<stdio.h>
+	<string.h>
+	"myheader2.h"
+

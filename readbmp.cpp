@@ -6,15 +6,8 @@
 #define BLUE 2
 #define ALPHA 3
 
-typedef struct {
-	   unsigned int width;
-	   unsigned int height;
-	   unsigned int planes;
-	   unsigned short bitcount;
-	   unsigned int size;
-	} BITMAPINFOHEADER;
 
-    BITMAPINFOHEADER bih;
+
 
 BITMAPINFOHEADER getImageData(FILE *image)
 	{
@@ -64,7 +57,7 @@ void readbmp(FILE *image)
 	//	printf(" %u= %d  ",count,pixelData[i][j][0]);
         count++;
 		j++;
-		printf("\n%u %u\n",i,j);
+		//printf("\n%u %u\n",i,j);
 		if(j==bih.width)
         {
             printf("\n");
