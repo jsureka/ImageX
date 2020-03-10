@@ -23,3 +23,4 @@ int main()
     writeBmp(image);
 
 }
+

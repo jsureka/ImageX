@@ -19,22 +19,23 @@
 	<stdio.h>
 	<string.h>
 
-1583385068 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\readbmp.cpp
+1583830049 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\readbmp.cpp
 	"myheader2.h"
 	<stdio.h>
 	<string.h>
 
-1583385487 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\main.cpp
+1583830421 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\main.cpp
 	"myheader2.h"
 	<stdio.h>
 	<string.h>
 
-1583384993 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\writebmp.cpp
+1583830579 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\writebmp.cpp
 	<stdio.h>
 	<string.h>
-	"myheader2.h"
+	<math.h>
+	"myheader.h"
 
-1583384661 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
+1583830049 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
 
 1583599161 source:c:\users\jitesh\desktop\spl1\main.cpp
 	"myheader2.h"
@@ -52,4 +53,9 @@
 	<stdio.h>
 	<string.h>
 	"myheader2.h"
+
+1583830579 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader.h
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
 
