@@ -37,24 +37,33 @@
 
 1583830049 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
 
-1583599161 source:c:\users\jitesh\desktop\spl1\main.cpp
-	"myheader2.h"
+1583878782 source:c:\users\jitesh\desktop\spl1\main.cpp
+	"myheader.h"
 	<stdio.h>
 	<string.h>
 
 1583601175 c:\users\jitesh\desktop\spl1\myheader2.h
 
-1583601206 source:c:\users\jitesh\desktop\spl1\readbmp.cpp
-	"myheader2.h"
+1583878474 source:c:\users\jitesh\desktop\spl1\readbmp.cpp
+	"myheader.h"
 	<stdio.h>
 	<string.h>
+	<stdlib.h>
+	<math.h>
 
-1583600986 source:c:\users\jitesh\desktop\spl1\writebmp.cpp
+1583875731 source:c:\users\jitesh\desktop\spl1\writebmp.cpp
 	<stdio.h>
 	<string.h>
-	"myheader2.h"
+	<math.h>
+	"myheader.h"
+	<stdlib.h>
 
 1583830579 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader.h
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+
+1583878885 c:\users\jitesh\desktop\spl1\myheader.h
 	<stdio.h>
 	<math.h>
 	<stdlib.h>

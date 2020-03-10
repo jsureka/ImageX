@@ -33,9 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
-		<Unit filename="myheader.h" />
-		<Unit filename="readbmp.cpp" />
-		<Unit filename="writeBMP.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
