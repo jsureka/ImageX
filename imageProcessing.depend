@@ -37,10 +37,10 @@
 
 1583830049 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
 
-1583878782 source:c:\users\jitesh\desktop\spl1\main.cpp
-	"myheader.h"
+1583955981 source:c:\users\jitesh\desktop\spl1\main.cpp
 	<stdio.h>
-	<string.h>
+	<math.h>
+	<stdlib.h>
 
 1583601175 c:\users\jitesh\desktop\spl1\myheader2.h
 

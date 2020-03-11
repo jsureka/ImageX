@@ -53,7 +53,7 @@ BITMAPINFOHEADER getImageData(FILE *image)
 	    printf("Width=%d\tHeight=%d\n",h.width,h.height);
     fseek(x,26,SEEK_SET);
 	    fread(&h.planes,2,1,x);
-	    printf("Number of planes:%d\n",h.planes);
+	   // printf("Number of planes:%d\n",h.planes);
 	    fseek(x,28,SEEK_SET);
 	    fread(&h.bitcount,2,1,x);
 	    printf("Bit Count:%d\n",h.bitcount);
@@ -67,7 +67,7 @@ void ReadImage(FILE *imageFile)
         unsigned int dataOffset;
         fseek(imageFile, DATA_OFFSET_OFFSET, SEEK_SET);
         fread(&dataOffset, 4, 1, imageFile);
-        printf("\n%d\n",dataOffset);
+       // printf("\n%d\n",dataOffset);
 
         int paddedRowSize = (int)(4 * ceil((float)(bih.width) / 4.0f))*(bih.bytecount);
         int unpaddedRowSize = (bih.width)*(bih.bytecount);
@@ -147,8 +147,13 @@ void WriteImage(const char *fileName)
         {
 
 
-                pixels[i+1]=(pixels[i+1]+pixels[i])/enter;
-                 pixels[i]=pixels[i]+2;
+               pixels[i]=(pixels[i]+pixels[i])/enter;
+                 //printf("%d\n",piels[i]);
+
+//                 if(pixels[i]<'0')
+//                    pixels[i]='0';
+//                 else if(pixels[i]>'255')
+//                    pixels[i]='255';
         }
         }
         else
