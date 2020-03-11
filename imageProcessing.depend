@@ -24,10 +24,10 @@
 	<stdio.h>
 	<string.h>
 
-1583830421 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\main.cpp
-	"myheader2.h"
+1583894942 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\main.cpp
 	<stdio.h>
-	<string.h>
+	<math.h>
+	<stdlib.h>
 
 1583830579 source:c:\users\jitesh sureka\desktop\imageprocessing\spl1\writebmp.cpp
 	<stdio.h>

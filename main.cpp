@@ -64,19 +64,15 @@ BITMAPINFOHEADER getImageData(FILE *image)
 void ReadImage(FILE *imageFile)
 {
         bih=getImageData(imageFile);
-        //FILE *imageFile = fopen(fileName, "rb");
         unsigned int dataOffset;
         fseek(imageFile, DATA_OFFSET_OFFSET, SEEK_SET);
         fread(&dataOffset, 4, 1, imageFile);
         printf("\n%d\n",dataOffset);
 
         int paddedRowSize = (int)(4 * ceil((float)(bih.width) / 4.0f))*(bih.bytecount);
-       // printf("%d\n",paddedRowSize);
-        //printf("%d\n",bih.bytecount);
         int unpaddedRowSize = (bih.width)*(bih.bytecount);
         int totalSize = unpaddedRowSize*(bih.height);
         pixels = (unsigned char*)malloc(totalSize);
-     //   printf("\n%d %d\n",bih.height,totalSize);
         int i = 0;
         unsigned char *currentRowPointer = pixels+((bih.height-1)*unpaddedRowSize);
         for (i = 0; i < bih.height; i++)
@@ -93,7 +89,6 @@ void WriteImage(const char *fileName)
 {
         FILE *outputFile = fopen(fileName, "wb");
         //*****HEADER************//
-        printf("%dhello\n",bih.width);
         const char *BM = "BM";
         fwrite(&BM[0], 1, 1, outputFile);
         fwrite(&BM[1], 1, 1, outputFile);
@@ -129,12 +124,11 @@ void WriteImage(const char *fileName)
         fwrite(&importantColors, 4, 1, outputFile);
         int i = 0;
         int unpaddedRowSize = bih.width*bih.bytecount;
-       // printf("\n%d %d",bih.height,unpaddedRowSize);
-        for ( i = 0; i < bih.height*unpaddedRowSize; i++)
-        {
-                pixels[i+1]=(pixels[i+1]+pixels[i])/20;
-
-        }
+//        for ( i = 0; i < bih.height*unpaddedRowSize; i++)
+//        {
+//                pixels[i+1]=(pixels[i+1]+pixels[i]);
+//
+//        }
         unsigned char pixeldata[bih.height][unpaddedRowSize/bih.bytecount][bih.bytecount];
         for ( i = 0; i < bih.height; i++)
         {
@@ -161,7 +155,7 @@ int main()
 	image=fopen(ipath,"rb+");
     ReadImage(image);
 
-    WriteImage("image1");
+    WriteImage("image1.bmp");
 
 }
 
