@@ -124,11 +124,37 @@ void WriteImage(const char *fileName)
         fwrite(&importantColors, 4, 1, outputFile);
         int i = 0;
         int unpaddedRowSize = bih.width*bih.bytecount;
-//        for ( i = 0; i < bih.height*unpaddedRowSize; i++)
-//        {
-//                pixels[i+1]=(pixels[i+1]+pixels[i]);
-//
-//        }
+        printf("\n 1. GrayScaling \n2. Darkening\n Choose any option :  ");
+        int choose;
+        scanf("%d",&choose);
+        if(choose==1){
+            for ( i = 0; i < bih.height*unpaddedRowSize-3; i+=3)
+        {
+                pixels[i]=(pixels[i+1]+pixels[i]+pixels[i+2])/3;
+                pixels[i+1]=pixels[i];
+                pixels[i+2]=pixels[i];
+              //  pixels[i+1]='\0';
+               // pixels[i+2]='\0';
+
+        }
+        }
+        else if(choose==2){
+                printf("Enter values between 2 - 10 :");
+                float enter;
+            scanf("%f",&enter);
+
+          for ( i = 0; i < bih.height*unpaddedRowSize; i++)
+        {
+
+
+                pixels[i+1]=(pixels[i+1]+pixels[i])/enter;
+                 pixels[i]=pixels[i]+2;
+        }
+        }
+        else
+            printf("Wrong choice");
+
+
         unsigned char pixeldata[bih.height][unpaddedRowSize/bih.bytecount][bih.bytecount];
         for ( i = 0; i < bih.height; i++)
         {
