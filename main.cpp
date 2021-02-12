@@ -1,192 +1,257 @@
+#include<bits/stdc++.h>
+using namespace std;
 
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#define DATA_OFFSET_OFFSET 0x000A
-#define WIDTH_OFFSET 0x0012
-#define HEIGHT_OFFSET 0x0016
-#define BITS_PER_PIXEL_OFFSET 0x001C
-#define HEADER_SIZE 14
-#define INFO_HEADER_SIZE 40
-#define NO_COMPRESION 0
-#define MAX_NUMBER_OF_COLORS 0
-#define ALL_COLORS_REQUIRED 0
+#pragma pack(push, 1)
+    typedef struct
+    {
+      char bitmapSignatureBytes[2];
+      uint32_t sizeOfBitmapImageBytes;
+      uint16_t reserved1;
+      uint16_t reserved2;
+      uint32_t pixelOffset[1][1];
 
-  unsigned char *pixels;
-void ReadImage(FILE* );
-
-void WriteImage(const char*);
-typedef struct {
-	   unsigned int width;
-	   unsigned int height;
-	   unsigned int planes;
-	   unsigned short bitcount;
-	   unsigned int size;
-	   unsigned int dataOffset;
-	   unsigned int bytecount;
-	} BITMAPINFOHEADER;
-
-   static  BITMAPINFOHEADER bih;
-
-
-static FILE *image;
-BITMAPINFOHEADER getImageData(FILE *);
-
-	char ipath[1000];
-
-void readbmp(FILE*);
-
-
-
-BITMAPINFOHEADER getImageData(FILE *image)
-	{
-	    FILE *x;
-	    x=image;
-	    BITMAPINFOHEADER h;
-	    fseek(x,2,SEEK_SET);
-	    fread(&h.size,4,1,x);
-	    printf("Size=%d\n",h.size);
-	    fseek(x,18,SEEK_SET);
-	    fread(&h.width,4,1,x);
-	    fseek(x,22,SEEK_SET);
-	    fread(&h.height,4,1,x);
-	    printf("Width=%d\tHeight=%d\n",h.width,h.height);
-    fseek(x,26,SEEK_SET);
-	    fread(&h.planes,2,1,x);
-	   // printf("Number of planes:%d\n",h.planes);
-	    fseek(x,28,SEEK_SET);
-	    fread(&h.bitcount,2,1,x);
-	    printf("Bit Count:%d\n",h.bitcount);
-	    h.bytecount=h.bitcount/8;
-	    return h;
-	}
-
-void ReadImage(FILE *imageFile)
+}bmpFileHeader;
+#pragma pack(pop)
+#pragma pack(push, 1)
+typedef struct
 {
-        bih=getImageData(imageFile);
-        unsigned int dataOffset;
-        fseek(imageFile, DATA_OFFSET_OFFSET, SEEK_SET);
-        fread(&dataOffset, 4, 1, imageFile);
-       // printf("\n%d\n",dataOffset);
+  uint32_t  dib_header_size;  // DIB Header size in bytes (40 bytes)
+  int32_t   width;         // Width of the image
+  int32_t   height;        // Height of image
+  uint16_t  num_planes;       // Number of color planes
+  uint16_t  bits_per_pixel;   // Bits per pixel
+  uint32_t  compression;      // Compression type
+  uint32_t  image_size_bytes; // Image size in bytes
+  int32_t   x_resolution_ppm; // Pixels per meter
+  int32_t   y_resolution_ppm; // Pixels per meter
+  uint32_t  num_colors;       // Number of colors
+  uint32_t  important_colors; // Important colors
 
-        int paddedRowSize = (int)(4 * ceil((float)(bih.width) / 4.0f))*(bih.bytecount);
-        int unpaddedRowSize = (bih.width)*(bih.bytecount);
-        int totalSize = unpaddedRowSize*(bih.height);
-        pixels = (unsigned char*)malloc(totalSize);
-        int i = 0;
-        unsigned char *currentRowPointer = pixels+((bih.height-1)*unpaddedRowSize);
-        for (i = 0; i < bih.height; i++)
+}bmpInfoHeader;
+#pragma pack(pop)
+
+#pragma pack(push,1)
+typedef struct
+{
+  uint8_t blue;
+  uint8_t green;
+  uint8_t red;
+
+}pixel;
+
+#pragma pack(pop)
+ pixel image[1000][1000];
+    pixel image_modified[1000][1000];
+int randNum(void);
+int main(void){
+
+  bmpFileHeader myBmpFileHeader;
+  bmpInfoHeader myBmpInfoHeader;
+    cout<<"Write the file name here : ";
+    char path[1000];
+    scanf("%s",path);
+
+  FILE *bmpImage = fopen(path, "rb");
+  FILE *newBmpImage = fopen("image1.bmp", "wb");
+
+  if (bmpImage == NULL)
+  {
+    printf("Error occured when opening file\n");
+  }
+
+
+
+    fread(&myBmpFileHeader, sizeof(myBmpFileHeader), 1, bmpImage);
+    fread(&myBmpInfoHeader, sizeof(myBmpInfoHeader), 1, bmpImage);
+
+    if (myBmpFileHeader.bitmapSignatureBytes[0]==0x42 && myBmpFileHeader.bitmapSignatureBytes[1]==0x4D && myBmpInfoHeader.dib_header_size == 40 && myBmpInfoHeader.bits_per_pixel == 24 && myBmpInfoHeader.compression ==0 )
+    {
+      printf(" File is BMP\n");
+    }else{
+      printf("Error\n");
+    }
+    int width = myBmpInfoHeader.width;
+    //printf("Width %i\n", width );
+    int height = abs(myBmpInfoHeader.height);
+    int padding = (4 - (width * sizeof(pixel)) % 4) % 4;
+
+    for (int i = 0; i < height; ++i)
+    {
+      fread(image[i], sizeof(pixel), width, bmpImage);
+      fseek(bmpImage, padding, SEEK_CUR);
+
+    }
+    cout<<"USER MENU\n\n"<<endl;
+    cout<<"1. Edge Detect"<<endl;
+    cout<<"2. Greyscale"<<endl;
+    cout<<"3. Brighten"<<endl;
+  int choose;
+  cin>>choose;
+  if(choose==1)
+  {
+        int gx[3][3];
+    int gy[3][3];
+
+    gx[0][0] = -1;
+    gx[0][1] = 0;
+    gx[0][2] = 1;
+
+    gx[1][0] = -2;
+    gx[1][1] = 0;
+    gx[1][2] = 2;
+
+    gx[2][0] = -1;
+    gx[2][1] = 0;
+    gx[2][2] = 1;
+
+
+    gy[0][0] = -1;
+    gy[0][1] = -2;
+    gy[0][2] = -1;
+
+    gy[1][0] = 0;
+    gy[1][1] = 0;
+    gy[1][2] = 0;
+
+    gy[2][0] = 1;
+    gy[2][1] = 2;
+    gy[2][2] = 1;
+
+    int gxValBlue;
+    int gyValBlue;
+
+    int gxValGreen;
+    int gyValGreen;
+
+    int gxValRed;
+    int gyValRed;
+
+    int squaredBlue;
+    int squaredGreen;
+    int squaredRed;
+
+
+
+
+
+       for (int lin = 0; lin < height; ++lin)
+    {
+
+      for (int col = 0; col < width; ++col)
+      {
+
+
+        if (lin !=0 && lin != height && col != 0 && col != width)// tem todos os vizinhos
         {
-                fseek(imageFile, dataOffset+(i*paddedRowSize), SEEK_SET);
-            fread(currentRowPointer, 1, unpaddedRowSize, imageFile);
-            currentRowPointer -= unpaddedRowSize;
+
+
+
+
+          gxValBlue = (image[lin-1][col-1].blue * gx[0][0] + image[lin-1][col].blue * gx[0][1] + image[lin-1][col+1].blue * gx[0][2] + image[lin][col-1].blue * gx[1][0] + image[lin][col].blue * gx[1][1] + image[lin][col+1].blue * gx[1][2] + image[lin-1][col-1].blue * gx[2][0] + image[lin+1][col].blue * gx[2][1] + image[lin+1][col+1].blue * gx[2][2]);
+          gyValBlue = (image[lin-1][col-1].blue * gy[0][0] + image[lin-1][col].blue * gy[0][1] + image[lin-1][col+1].blue * gy[0][2] + image[lin][col-1].blue * gy[1][0] + image[lin][col].blue * gy[1][1] + image[lin][col+1].blue * gy[1][2] + image[lin-1][col-1].blue * gy[2][0] + image[lin+1][col].blue * gy[2][1] + image[lin+1][col+1].blue * gy[2][2]);
+
+          squaredBlue = (int)sqrt(gxValBlue*gxValBlue + gyValBlue*gyValBlue);
+
+          gxValGreen = (image[lin-1][col-1].green * gx[0][0] + image[lin-1][col].green * gx[0][1] + image[lin-1][col+1].green * gx[0][2] + image[lin][col-1].green * gx[1][0] + image[lin][col].green * gx[1][1] + image[lin][col+1].green * gx[1][2] + image[lin-1][col-1].green * gx[2][0] + image[lin+1][col].green * gx[2][1] + image[lin+1][col+1].green * gx[2][2]);
+          gyValGreen = (image[lin-1][col-1].green * gy[0][0] + image[lin-1][col].green * gy[0][1] + image[lin-1][col+1].green * gy[0][2] + image[lin][col-1].green * gy[1][0] + image[lin][col].green * gy[1][1] + image[lin][col+1].green * gy[1][2] + image[lin-1][col-1].green * gy[2][0] + image[lin+1][col].green * gy[2][1] + image[lin+1][col+1].green * gy[2][2]);
+
+          squaredGreen = (int)sqrt(gxValGreen*gxValGreen + gyValGreen*gyValGreen);
+
+          gxValRed = (image[lin-1][col-1].red * gx[0][0] + image[lin-1][col].red * gx[0][1] + image[lin-1][col+1].red * gx[0][2] + image[lin][col-1].red * gx[1][0] + image[lin][col].red * gx[1][1] + image[lin][col+1].red * gx[1][2] + image[lin-1][col-1].red * gx[2][0] + image[lin+1][col].red * gx[2][1] + image[lin+1][col+1].red * gx[2][2]);
+          gyValRed = (image[lin-1][col-1].red * gy[0][0] + image[lin-1][col].red * gy[0][1] + image[lin-1][col+1].red * gy[0][2] + image[lin][col-1].red * gy[1][0] + image[lin][col].red * gy[1][1] + image[lin][col+1].red * gy[1][2] + image[lin-1][col-1].red * gy[2][0] + image[lin+1][col].red * gy[2][1] + image[lin+1][col+1].red * gy[2][2]);
+
+          squaredRed = (int)sqrt(gxValRed*gxValRed + gyValRed*gyValRed);
+
+
+
+          if (squaredBlue > 255)
+          {
+            image_modified[lin][col].blue = 255;
+          }else{
+            image_modified[lin][col].blue = squaredBlue;
+          }
+
+
+
+          if (squaredGreen > 255)
+          {
+            image_modified[lin][col].green = 255;
+          }else{
+            image_modified[lin][col].green = squaredGreen;
+          }
+
+
+          if (squaredRed > 255)
+          {
+            image_modified[lin][col].red = 255;
+          }else{
+            image_modified[lin][col].red = squaredRed;
+          }
+
+
+
+
+
+        }else { // bottom
+
+
+          image_modified[lin][col].blue = 0;
+          image_modified[lin][col].green = 0;
+          image_modified[lin][col].red = 0;
+
+
         }
 
-        fclose(imageFile);
+
+
+
+
+    }
+
+      }
+  }
+  else if( choose==2)
+  {
+
+       for (int lin = 0; lin < height; ++lin)
+        {
+
+      for (int col = 0; col < width; ++col)
+      {
+
+          image_modified[lin][col].blue=(image[lin][col].blue+image[lin][col].red+image[lin][col].green)/3;
+          image_modified[lin][col].red=(image[lin][col].blue+image[lin][col].red+image[lin][col].green)/3;
+          image_modified[lin][col].green=(image[lin][col].blue+image[lin][col].red+image[lin][col].green)/3;
+
+      }
+
+      }
+
+  }
+  else if(choose==3)
+  {
+
+  }
+fwrite(&myBmpFileHeader, sizeof(myBmpFileHeader),1, newBmpImage);
+fwrite(&myBmpInfoHeader, sizeof(myBmpInfoHeader), 1, newBmpImage);
+
+
+for (int i = 0; i < height; ++i)
+{
+
+  for (int k = 0; k < padding; ++k)
+  {
+    fputc(0x00, newBmpImage);
+  }
+  fwrite(image_modified[i], sizeof(pixel), width, newBmpImage);
 }
 
-void WriteImage(const char *fileName)
-{
-        FILE *outputFile = fopen(fileName, "wb");
-        //*****HEADER************//
-        const char *BM = "BM";
-        fwrite(&BM[0], 1, 1, outputFile);
-        fwrite(&BM[1], 1, 1, outputFile);
-        int paddedRowSize = (int)(4 * ceil((float)bih.width/4.0f))*bih.bytecount;
-        unsigned int fileSize = paddedRowSize*bih.height + HEADER_SIZE + INFO_HEADER_SIZE;
-        fwrite(&fileSize, 4, 1, outputFile);
-        unsigned int reserved = 0x0000;
-        fwrite(&reserved, 4, 1, outputFile);
-        unsigned int dataOffset = HEADER_SIZE+INFO_HEADER_SIZE;
-        fwrite(&dataOffset, 4, 1, outputFile);
 
-        //*******INFO*HEADER******//
-        unsigned int infoHeaderSize = INFO_HEADER_SIZE;
-        fwrite(&infoHeaderSize, 4, 1, outputFile);
-        fwrite(&bih.width, 4, 1, outputFile);
-        fwrite(&bih.height, 4, 1, outputFile);
-        short planes = 1; //always 1
-        fwrite(&planes, 2, 1, outputFile);
-        fwrite(&bih.bitcount, 2, 1, outputFile);
-        //write compression
-        unsigned int compression = NO_COMPRESION;
-        fwrite(&compression, 4, 1, outputFile);
-
-        unsigned int imageSize = bih.width*bih.height*bih.bytecount;
-        fwrite(&imageSize, 4, 1, outputFile);
-        unsigned int resolutionX = 11811; //300 dpi
-        unsigned int resolutionY = 11811; //300 dpi
-        fwrite(&resolutionX, 4, 1, outputFile);
-        fwrite(&resolutionY, 4, 1, outputFile);
-        unsigned int colorsUsed = MAX_NUMBER_OF_COLORS;
-        fwrite(&colorsUsed, 4, 1, outputFile);
-        unsigned int importantColors = ALL_COLORS_REQUIRED;
-        fwrite(&importantColors, 4, 1, outputFile);
-        int i = 0;
-        int unpaddedRowSize = bih.width*bih.bytecount;
-        printf("\n 1. GrayScaling \n2. Darkening\n Choose any option :  ");
-        int choose;
-        scanf("%d",&choose);
-        if(choose==1){
-            for ( i = 0; i < bih.height*unpaddedRowSize-3; i+=3)
-        {
-                pixels[i]=(pixels[i+1]+pixels[i]+pixels[i+2])/3;
-                pixels[i+1]=pixels[i];
-                pixels[i+2]=pixels[i];
-              //  pixels[i+1]='\0';
-               // pixels[i+2]='\0';
-
-        }
-        }
-        else if(choose==2){
-                printf("Enter values between 2 - 10 :");
-                float enter;
-            scanf("%f",&enter);
-
-          for ( i = 0; i < bih.height*unpaddedRowSize; i++)
-        {
-
-
-               pixels[i]=(pixels[i]+pixels[i])/enter;
-                 //printf("%d\n",piels[i]);
-
-//                 if(pixels[i]<'0')
-//                    pixels[i]='0';
-//                 else if(pixels[i]>'255')
-//                    pixels[i]='255';
-        }
-        }
-        else
-            printf("Wrong choice");
-
-
-        unsigned char pixeldata[bih.height][unpaddedRowSize/bih.bytecount][bih.bytecount];
-        for ( i = 0; i < bih.height; i++)
-        {
-                int pixelOffset = ((bih.height - i) - 1)*unpaddedRowSize;
-                fwrite(&pixels[pixelOffset], 1, paddedRowSize, outputFile);
-
-        }
-        fclose(outputFile);
+fclose(newBmpImage);
+fclose(bmpImage);
+free(image);
+free(image_modified);
+return 0;
 }
 
-int main()
-{
-    while(image==NULL)
-	{
-
-		printf("Enter Path : ");
-		scanf("%s",ipath);
-		image=fopen(ipath,"rb+");
-		if(image==NULL)
-		printf("Error! Enter path again\n\n");
-	}
-
-
-	image=fopen(ipath,"rb+");
-    ReadImage(image);
-
-    WriteImage("image1.bmp");
-
-}
 
