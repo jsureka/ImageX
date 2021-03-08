@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+#include<graphics.h>
+#include<conio.h>
 #pragma pack(push, 1)
     typedef struct
     {
@@ -40,9 +41,11 @@ typedef struct
 }pixel;
 
 #pragma pack(pop)
- pixel image[1000][1000];
+void edgeDetection();
+int options();
+    pixel image[1000][1000];
     pixel image_modified[1000][1000];
-      pixel image_temp[1000][1000];
+    pixel image_temp[1000][1000];
 int randNum(void);
 bmpFileHeader myBmpFileHeader;
 bmpInfoHeader myBmpInfoHeader;
@@ -51,6 +54,23 @@ bmpInfoHeader myBmpInfoHeader;
   FILE *newBmpImage;
       int width;
     int height;
+    void viewOptions();
+void viewInput(char input[100])
+{
+
+    int heightOfScreen = GetSystemMetrics(SM_CXSCREEN);
+    int widthOfScreen = GetSystemMetrics(SM_CYSCREEN);
+    //printf("1");
+    char nameOfImage[20];
+    snprintf(nameOfImage, 20, "%s",input); // puts string into buffer
+   // printf("%s\n", nameOfImage);
+    //variable++;
+    initwindow(800,700, nameOfImage,300,0);
+    readimagefile(nameOfImage,200,200,600,600);
+getchar();
+getchar();
+    closegraph();
+}
 void insertionSort(int arr[], int n)
 {
     int i, key, j;
@@ -67,7 +87,7 @@ void insertionSort(int arr[], int n)
     }
 }
 
-void greyscale(){
+void greyscale(pixel temp[1000][1000], pixel outemp[1000][1000]){
 
 
        for (int lin = 0; lin < height; ++lin)
@@ -76,9 +96,9 @@ void greyscale(){
       for (int col = 0; col < width; ++col)
       {
 
-          image_temp[lin][col].blue=(image[lin][col].blue+image[lin][col].red+image[lin][col].green)/3;
-          image_temp[lin][col].red=(image[lin][col].blue+image[lin][col].red+image[lin][col].green)/3;
-          image_temp[lin][col].green=(image[lin][col].blue+image[lin][col].red+image[lin][col].green)/3;
+          outemp[lin][col].blue=(temp[lin][col].blue+temp[lin][col].red+temp[lin][col].green)/3;
+          outemp[lin][col].red=(temp[lin][col].blue+temp[lin][col].red+temp[lin][col].green)/3;
+          outemp[lin][col].green=(temp[lin][col].blue+temp[lin][col].red+temp[lin][col].green)/3;
 
       }
 
@@ -130,7 +150,7 @@ void edgeDetection(){
     int squaredGreen;
     int squaredRed;
 
-    greyscale();
+    greyscale(image,image_temp);
 
 
        for (int lin = 0; lin < height; ++lin)
@@ -211,27 +231,27 @@ void edgeDetection(){
 
 }
 
-void smoothing(){
+void smoothing(pixel temp[1000][1000], pixel outemp[1000][1000]){
         int matrix[9];
        for (int lin = 0; lin < height; ++lin)
         {
 
         for (int col = 0; col < width; ++col)
             {
-            matrix[0] = image[lin-1][col-1].blue;
-            matrix[1] = image[lin-1][col].blue;
-            matrix[2] = image[lin-1][col+1].blue;
-            matrix[3] = image[lin][col-1].blue;
-            matrix[4] = image[lin][col].blue;
-            matrix[5] = image[lin][col+1].blue;
-            matrix[6] = image[lin+1][col-1].blue;
-            matrix[7] = image[lin+1][col].blue;
-            matrix[8] = image[lin+1][col+1].blue;
+            matrix[0] = temp[lin-1][col-1].blue;
+            matrix[1] = temp[lin-1][col].blue;
+            matrix[2] = temp[lin-1][col+1].blue;
+            matrix[3] = temp[lin][col-1].blue;
+            matrix[4] = temp[lin][col].blue;
+            matrix[5] = temp[lin][col+1].blue;
+            matrix[6] = temp[lin+1][col-1].blue;
+            matrix[7] = temp[lin+1][col].blue;
+            matrix[8] = temp[lin+1][col+1].blue;
 
             //sort matrix image
             insertionSort(matrix,9);
             //put the median to the new image
-            image_modified[lin][col].blue=matrix[4];
+            outemp[lin][col].blue=matrix[4];
             }
         }
          for (int lin = 0; lin < height; ++lin)
@@ -239,20 +259,20 @@ void smoothing(){
 
         for (int col = 0; col < width; ++col)
             {
-            matrix[0] = image[lin-1][col-1].green;
-            matrix[1] = image[lin-1][col].green;
-            matrix[2] = image[lin-1][col+1].green;
-            matrix[3] = image[lin][col-1].green;
-            matrix[4] = image[lin][col].green;
-            matrix[5] = image[lin][col+1].green;
-            matrix[6] = image[lin+1][col-1].green;
-            matrix[7] = image[lin+1][col].green;
-            matrix[8] = image[lin+1][col+1].green;
+            matrix[0] = temp[lin-1][col-1].green;
+            matrix[1] = temp[lin-1][col].green;
+            matrix[2] = temp[lin-1][col+1].green;
+            matrix[3] = temp[lin][col-1].green;
+            matrix[4] = temp[lin][col].green;
+            matrix[5] = temp[lin][col+1].green;
+            matrix[6] = temp[lin+1][col-1].green;
+            matrix[7] = temp[lin+1][col].green;
+            matrix[8] = temp[lin+1][col+1].green;
 
             //sort matrix image
             sort(matrix,matrix+9);
             //put the median to the new image
-            image_modified[lin][col].green=matrix[4];
+            outemp[lin][col].green=matrix[4];
             }
         }
            for (int lin = 0; lin < height; ++lin)
@@ -260,20 +280,20 @@ void smoothing(){
 
         for (int col = 0; col < width; ++col)
             {
-            matrix[0] = image[lin-1][col-1].red;
-            matrix[1] = image[lin-1][col].red;
-            matrix[2] = image[lin-1][col+1].red;
-            matrix[3] = image[lin][col-1].red;
-            matrix[4] = image[lin][col].red;
-            matrix[5] = image[lin][col+1].red;
-            matrix[6] = image[lin+1][col-1].red;
-            matrix[7] = image[lin+1][col].red;
-            matrix[8] = image[lin+1][col+1].red;
+            matrix[0] = temp[lin-1][col-1].red;
+            matrix[1] = temp[lin-1][col].red;
+            matrix[2] = temp[lin-1][col+1].red;
+            matrix[3] = temp[lin][col-1].red;
+            matrix[4] = temp[lin][col].red;
+            matrix[5] = temp[lin][col+1].red;
+            matrix[6] = temp[lin+1][col-1].red;
+            matrix[7] = temp[lin+1][col].red;
+            matrix[8] = temp[lin+1][col+1].red;
 
             //sort matrix image
             insertionSort(matrix,9);
             //put the median to the new image
-            image_modified[lin][col].red=matrix[4];
+            outemp[lin][col].red=matrix[4];
             }
         }
 
@@ -307,7 +327,7 @@ void brightening(){
 
 }
 
-void image_blur(){
+void image_blur(pixel temp[1000][1000], pixel outemp[1000][1000]){
     int matrix[9];
      for (int lin = 0; lin < height; ++lin)
         {
@@ -317,18 +337,18 @@ void image_blur(){
                 if( lin<1||col<1||lin+1==width||col+1==col)
                     continue;
                 int sum = 0;
-                 matrix[0] = image[lin-1][col-1].green;
-                matrix[1] = image[lin-1][col].green;
-                matrix[2] = image[lin-1][col+1].green;
-                matrix[3] = image[lin][col-1].green;
-                matrix[4] = image[lin][col].green;
-                matrix[5] = image[lin][col+1].green;
-                matrix[6] = image[lin+1][col-1].green;
-                matrix[7] = image[lin+1][col].green;
-                matrix[8] = image[lin+1][col+1].green;
+                 matrix[0] = temp[lin-1][col-1].green;
+                matrix[1] = temp[lin-1][col].green;
+                matrix[2] = temp[lin-1][col+1].green;
+                matrix[3] = temp[lin][col-1].green;
+                matrix[4] = temp[lin][col].green;
+                matrix[5] = temp[lin][col+1].green;
+                matrix[6] = temp[lin+1][col-1].green;
+                matrix[7] = temp[lin+1][col].green;
+                matrix[8] = temp[lin+1][col+1].green;
                 sum = accumulate(matrix,matrix+9,sum);
                 int avg=sum/9;
-                image_modified[lin][col].green=avg;
+                outemp[lin][col].green=avg;
             }
 
         }
@@ -340,18 +360,18 @@ void image_blur(){
                 if( lin<1||col<1||lin+1==width||col+1==col)
                     continue;
                 int sum = 0;
-                 matrix[0] = image[lin-1][col-1].red;
-                matrix[1] = image[lin-1][col].red;
-                matrix[2] = image[lin-1][col+1].red;
-                matrix[3] = image[lin][col-1].red;
-                matrix[4] = image[lin][col].red;
-                matrix[5] = image[lin][col+1].red;
-                matrix[6] = image[lin+1][col-1].red;
-                matrix[7] = image[lin+1][col].red;
-                matrix[8] = image[lin+1][col+1].red;
+                 matrix[0] = temp[lin-1][col-1].red;
+                matrix[1] = temp[lin-1][col].red;
+                matrix[2] = temp[lin-1][col+1].red;
+                matrix[3] = temp[lin][col-1].red;
+                matrix[4] = temp[lin][col].red;
+                matrix[5] = temp[lin][col+1].red;
+                matrix[6] = temp[lin+1][col-1].red;
+                matrix[7] = temp[lin+1][col].red;
+                matrix[8] = temp[lin+1][col+1].red;
                 sum = accumulate(matrix,matrix+9,sum);
                 int avg=sum/9;
-                image_modified[lin][col].red=avg;
+                outemp[lin][col].red=avg;
             }
 
         }
@@ -363,41 +383,40 @@ void image_blur(){
                 if( lin<1||col<1||lin+1==width||col+1==col)
                     continue;
                 int sum = 0;
-                 matrix[0] = image[lin-1][col-1].blue;
-                matrix[1] = image[lin-1][col].blue;
-                matrix[2] = image[lin-1][col+1].blue;
-                matrix[3] = image[lin][col-1].blue;
-                matrix[4] = image[lin][col].blue;
-                matrix[5] = image[lin][col+1].blue;
-                matrix[6] = image[lin+1][col-1].blue;
-                matrix[7] = image[lin+1][col].blue;
-                matrix[8] = image[lin+1][col+1].blue;
+                 matrix[0] = temp[lin-1][col-1].blue;
+                matrix[1] = temp[lin-1][col].blue;
+                matrix[2] = temp[lin-1][col+1].blue;
+                matrix[3] = temp[lin][col-1].blue;
+                matrix[4] = temp[lin][col].blue;
+                matrix[5] = temp[lin][col+1].blue;
+                matrix[6] = temp[lin+1][col-1].blue;
+                matrix[7] = temp[lin+1][col].blue;
+                matrix[8] = temp[lin+1][col+1].blue;
                 sum = accumulate(matrix,matrix+9,sum);
                 int avg=sum/9;
-                image_modified[lin][col].blue=avg;
+                outemp[lin][col].blue=avg;
             }
 
         }
 
 }
-void noise(){
-
+void noise(pixel temp[1000][1000], pixel outemp[1000][1000]){
       for (int lin = 0; lin < height; ++lin)
         {
 
         for (int col = 0; col < width; ++col)
             {
-                image_modified[lin][col].blue = rand()%150 + image[lin][col].blue;
-                image_modified[lin][col].green = rand()%150 +image[lin][col].green;
-                image_modified[lin][col].red = rand()%150 +image[lin][col].red;
-                 if(image_modified[lin][col].blue > 255)
-                image_modified[lin][col].blue = 255;
+                outemp[lin][col].blue = rand()%150 + temp[lin][col].blue;
+                outemp[lin][col].green = rand()%150 +temp[lin][col].green;
+                outemp[lin][col].red = rand()%150 +temp[lin][col].red;
+                 if(outemp[lin][col].blue > 255)
+                outemp[lin][col].blue = 255;
 
-                if(image_modified[lin][col].green > 255)
-                image_modified[lin][col].green = 255;
+                if(outemp[lin][col].green > 255)
+                outemp[lin][col].green = 255;
 
-                if(image_modified[lin][col].red > 255)
-                image_modified[lin][col].red = 255;
+                if(outemp[lin][col].red > 255)
+                outemp[lin][col].red = 255;
 
             }
 
@@ -405,7 +424,8 @@ void noise(){
 
 }
 float ep[1000][1000] = {0.0}, eg[1000][1000] = {0.0};
-void halftoning(){
+void halftoning(pixel temp[1000][1000], pixel outemp[1000][1000]){
+    greyscale(image,image_temp);
     int threshold;
     cout<<"Enter Halftoning Threshold ( Standard - 128 ): ";
         cin>>threshold;
@@ -433,12 +453,12 @@ void halftoning(){
                         } /* ends loop over j */
                         } /* ends loop over i */
                         ep[m][n] = sum_p;
-                        t = image[m][n].blue + ep[m][n];
+                        t = image_temp[m][n].blue + ep[m][n];
                         if(t > threshold){
                         eg[m][n] = t - threshold*2;
-                        image_modified[m][n].blue = image[m][n].blue;
-                         image_modified[m][n].red = image[m][n].blue;
-                          image_modified[m][n].green = image[m][n].blue;
+                        image_modified[m][n].blue = image_temp[m][n].blue;
+                         image_modified[m][n].red = image_temp[m][n].blue;
+                          image_modified[m][n].green = image_temp[m][n].blue;
                         }
                         else{ /* t <= threshold */
                         eg[m][n] = t;
@@ -452,13 +472,132 @@ void halftoning(){
 
 
 }
+
+void sharpen(pixel temp[1000][1000], pixel outemp[1000][1000])
+{
+    int msk[3][3]={{0,-1,0},
+                {-1,5,1},
+                {0,-1,0}};
+     for (int lin = 0; lin < height; ++lin)
+        {
+
+        for (int col = 0; col < width; ++col)
+            {
+                if( lin<1||col<1||lin+1==width||col+1==col)
+                {
+                    outemp[lin][col].blue = temp[lin][col].blue;
+                    outemp[lin][col].blue = temp[lin][col].green;
+                    outemp[lin][col].blue = temp[lin][col].red;
+                     continue;
+
+                }
+
+                  for (int YK = -1; YK < 2; YK++) {
+                    for (int XK = -1; XK < 2; XK++) {
+
+                    outemp[lin][col].red = temp[lin][col].red + msk[YK+1][XK+1] * temp[lin][col].red;
+                    outemp[lin][col].green = temp[lin][col].green + msk[YK+1][XK+1] * temp[lin][col].green;
+                    outemp[lin][col].blue = temp[lin][col].blue + msk[YK+1][XK+1] * temp[lin][col].blue;
+
+                    }
+                }
+            }
+        }
+
+}
+ char out[100]="image1.bmp";
+ int padding = (4 - (width * sizeof(pixel)) % 4) % 4;
+
+int options()
+{
+     newBmpImage = fopen("image1.bmp", "wb");
+    int choose;
+  cin>>choose;
+      if(choose==1)
+  {
+    edgeDetection();
+
+  }
+  else if( choose==2)
+  {
+        greyscale(image,image_modified);
+  }
+  else if(choose==3)
+  {
+    smoothing(image,image_temp);
+    cout<<"Enter the smoothing threshold ( 2 - 10 ) : ";
+      int th;
+      cin>>th;
+     for(int i=0;i<th;i++)
+      smoothing(image_temp,image_temp);
+     smoothing(image_temp,image_modified);
+
+  }
+  else if( choose == 4)
+  {
+      brightening();
+  }
+  else if (choose == 5)
+  {
+      image_blur(image,image_temp);
+      cout<<"Enter the blur threshold ( 2 - 10 ) : ";
+      int th;
+      cin>>th;
+      for(int i=0;i<th;i++)
+      image_blur(image_temp,image_temp);
+      image_blur(image_temp,image_modified);
+
+  }
+  else if (choose == 6)
+  {
+      noise(image,image_modified);
+      //noise(image_temp,image_modified);
+  }
+  else if (choose == 7)
+  {
+      halftoning(image,image_modified);
+  }
+  else if(choose==8)
+  {
+       sharpen(image,image_modified);
+     cout<<"Enter the sharpen threshold ( 2 - 10 ) : ";
+      int th;
+      cin>>th;
+      for(int i=0;i<th;i++)
+      //sharpen(image_temp,image_temp);
+      sharpen(image_modified,image_modified);
+  }
+  else if(choose == 9)
+  {
+      cout<<"Thank You For Using ImageX"<<endl;
+    return 0;
+  }
+    fwrite(&myBmpFileHeader, sizeof(myBmpFileHeader),1, newBmpImage);
+    fwrite(&myBmpInfoHeader, sizeof(myBmpInfoHeader), 1, newBmpImage);
+
+    for (int i = 0; i < height; ++i)
+    {
+
+      for (int k = 0; k < padding; ++k)
+      {
+        fputc(0x00, newBmpImage);
+      }
+      fwrite(image_modified[i], sizeof(pixel), width, newBmpImage);
+    }
+    fclose(newBmpImage);
+    fclose(bmpImage);
+    free(image_modified);
+     viewInput(out);
+     options();
+}
 int main(void){
     char ipath[100];
+
     printf("Enter Path : ");
     scanf("%s",ipath);
     bmpImage = fopen(ipath, "rb");
-    newBmpImage = fopen("image1.bmp", "wb");
 
+    viewInput(ipath);
   if (bmpImage == NULL)
   {
     printf("Error occured when opening file\n");
@@ -477,7 +616,7 @@ int main(void){
     }
        width = myBmpInfoHeader.width;
     height = abs(myBmpInfoHeader.height);
-    int padding = (4 - (width * sizeof(pixel)) % 4) % 4;
+
 
     for (int i = 0; i < height; ++i)
     {
@@ -490,67 +629,13 @@ int main(void){
     cout<<"2. Greyscale"<<endl;
     cout<<"3. Smoothing"<<endl;
     cout<<"4. Brightening"<<endl;
-  int choose;
-  cin>>choose;
-  if(choose==1)
-  {
-    edgeDetection();
-  }
-  else if( choose==2)
-  {
-        greyscale();
-           for (int lin = 0; lin < height; ++lin)
-        {
+    cout<<"5. Image Blur"<<endl;
+    cout<<"6. Noise Generator"<<endl;
+    cout<<"7. Image Halftoning"<<endl;
+    cout<<"8. Sharpening" <<endl;
 
-            for (int col = 0; col < width; ++col)
-            {
-                image_modified[lin][col].blue=image_temp[lin][col].blue;
-                image_modified[lin][col].green=image_temp[lin][col].green;
-                image_modified[lin][col].red=image_temp[lin][col].red;
-            }
-
-        }
-
-
-  }
-  else if(choose==3)
-  {
-    smoothing();
-  }
-  else if( choose == 4)
-  {
-      brightening();
-  }
-  else if (choose == 5)
-  {
-      image_blur();
-  }
-  else if (choose == 6)
-  {
-      noise();
-  }
-  else if (choose == 7)
-  {
-      halftoning();
-  }
-fwrite(&myBmpFileHeader, sizeof(myBmpFileHeader),1, newBmpImage);
-fwrite(&myBmpInfoHeader, sizeof(myBmpInfoHeader), 1, newBmpImage);
-
-
-for (int i = 0; i < height; ++i)
-{
-
-  for (int k = 0; k < padding; ++k)
-  {
-    fputc(0x00, newBmpImage);
-  }
-  fwrite(image_modified[i], sizeof(pixel), width, newBmpImage);
-}
-
-fclose(newBmpImage);
-fclose(bmpImage);
-free(image);
-free(image_modified);
+  options();
+ free(image);
 return 0;
 }
 
