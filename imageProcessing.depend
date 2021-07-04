@@ -37,8 +37,8 @@
 
 1583830049 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
 
-1613502002 source:c:\users\jitesh\desktop\spl1\main.cpp
-	<bits/stdc++.h>
+1624891479 source:c:\users\jitesh\desktop\spl1\main.cpp
+	"header.h"
 
 1583601175 c:\users\jitesh\desktop\spl1\myheader2.h
 
@@ -65,4 +65,36 @@
 	<stdio.h>
 	<math.h>
 	<stdlib.h>
+
+1624799303 source:c:\users\jitesh\desktop\spl1\viewimage.cpp
+	"header.h"
+
+1624803070 c:\users\jitesh\desktop\spl1\header.h
+	<bits/stdc++.h>
+	<graphics.h>
+	<conio.h>
+
+1624800265 source:c:\users\jitesh\desktop\spl1\greyscale.cpp
+	"header.h"
+
+1624800687 source:c:\users\jitesh\desktop\spl1\edgedetection.cpp
+	"header.h"
+
+1624801500 source:c:\users\jitesh\desktop\spl1\smoothing.cpp
+	"header.h"
+
+1624801991 source:c:\users\jitesh\desktop\spl1\brightening.cpp
+	"header.h"
+
+1624802457 source:c:\users\jitesh\desktop\spl1\imageblur.cpp
+	"header.h"
+
+1624802703 source:c:\users\jitesh\desktop\spl1\noisegeneration.cpp
+	"header.h"
+
+1624802891 source:c:\users\jitesh\desktop\spl1\halftoning.cpp
+	"header.h"
+
+1624803071 source:c:\users\jitesh\desktop\spl1\sharpening.cpp
+	"header.h"
 
