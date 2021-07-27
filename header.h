@@ -41,11 +41,13 @@ typedef struct
 
 }pixel;
 #pragma pack(pop)
+
     int options();
     int randNum(void);
     void edgeDetection();
     void viewOptions();
 void viewInput(char*);
+void readImage(char ipath[100]);
 void greyscale(pixel temp[1000][1000], pixel outemp[1000][1000],int height, int width);
 void edgeDetection(pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width);
 void smoothing(pixel temp[1000][1000], pixel outemp[1000][1000],int height,int width);
@@ -54,3 +56,10 @@ void image_blur(pixel temp[1000][1000], pixel outemp[1000][1000],int height,int 
 void noise(pixel temp[1000][1000], pixel outemp[1000][1000],int height, int width);
 void halftoning(pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width);
 void sharpen(pixel temp[1000][1000], pixel outemp[1000][1000],int height, int width);
+void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
+                FILE *newBmpImage,FILE *bmpImage,int padding,pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width);
+void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
+                FILE *newBmpImage,FILE *bmpImage,int padding,pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width);
+void writeImage(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
+                FILE *newBmpImage,FILE *bmpImage, int width, int height, int padding, pixel image_modified[1000][1000]
+);

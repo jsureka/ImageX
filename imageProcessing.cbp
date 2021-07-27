@@ -41,8 +41,11 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="noiseGeneration.cpp" />
 		<Unit filename="sharpening.cpp" />
+		<Unit filename="showMainMenu.cpp" />
 		<Unit filename="smoothing.cpp" />
 		<Unit filename="viewImage.cpp" />
+		<Unit filename="viewOptions.cpp" />
+		<Unit filename="writeImage.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

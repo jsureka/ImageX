@@ -12,7 +12,6 @@ void viewInput(char input[100])
     //variable++;
     initwindow(800,700, nameOfImage,300,0);
     readimagefile(nameOfImage,200,200,600,600);
-getchar();
-getchar();
+    delay(3000);
     closegraph();
 }

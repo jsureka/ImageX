@@ -37,7 +37,7 @@
 
 1583830049 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
 
-1624891479 source:c:\users\jitesh\desktop\spl1\main.cpp
+1627330754 source:c:\users\jitesh\desktop\spl1\main.cpp
 	"header.h"
 
 1583601175 c:\users\jitesh\desktop\spl1\myheader2.h
@@ -66,10 +66,10 @@
 	<math.h>
 	<stdlib.h>
 
-1624799303 source:c:\users\jitesh\desktop\spl1\viewimage.cpp
+1627329709 source:c:\users\jitesh\desktop\spl1\viewimage.cpp
 	"header.h"
 
-1624803070 c:\users\jitesh\desktop\spl1\header.h
+1627332051 c:\users\jitesh\desktop\spl1\header.h
 	<bits/stdc++.h>
 	<graphics.h>
 	<conio.h>
@@ -95,6 +95,15 @@
 1624802891 source:c:\users\jitesh\desktop\spl1\halftoning.cpp
 	"header.h"
 
-1624803071 source:c:\users\jitesh\desktop\spl1\sharpening.cpp
+1624891590 source:c:\users\jitesh\desktop\spl1\sharpening.cpp
+	"header.h"
+
+1627330899 source:c:\users\jitesh\desktop\spl1\showmainmenu.cpp
+	"header.h"
+
+1627332051 source:c:\users\jitesh\desktop\spl1\viewoptions.cpp
+	"header.h"
+
+1627331802 source:c:\users\jitesh\desktop\spl1\writeimage.cpp
 	"header.h"
 
