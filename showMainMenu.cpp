@@ -59,7 +59,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
            // printf("\n now point is %d %d",position.x,position.y);
             count++;
         }
-        if(count==2) break;
+        if(count==5) break;
     }
     int x,y;
     x = position.x;
@@ -73,7 +73,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         edgeDetection(image,image_modified,image_temp,height,width);
         char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+                viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
     }
 
@@ -85,7 +85,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         greyscale(image,image_modified,height,width);
          char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+                viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
 
     }
@@ -103,7 +103,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         smoothing(image_temp,image_modified,height,width);
          char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+                viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
 
     }
@@ -113,10 +113,10 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
          closegraph();
         delay(500);
         newBmpImage = fopen("image1.bmp", "wb");
-        brightening(image_temp,image_modified,height,width);
+        brightening(image,image_modified,height,width);
          char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+        viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
 
     }
@@ -134,7 +134,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         image_blur(image_temp,image_modified,height,width);
          char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+                viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
 
     }
@@ -148,7 +148,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         noise(image,image_modified,height,width);
          char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+                viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
     }
 
@@ -160,7 +160,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         halftoning(image,image_modified,image_temp,height,width);
          char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+                viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
 
     }
@@ -179,7 +179,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
             sharpen(image_temp,image_modified,height,width);
              char s[100] = "image1.bmp";
         writeImage(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified);
-        viewInput(s);
+                viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding,image,image_modified,image_temp,height,width);
     }
 

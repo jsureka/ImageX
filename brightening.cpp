@@ -3,27 +3,29 @@
 void brightening(pixel image[1000][1000],pixel image_modified[1000][1000],int height,int width)
 {
     cout<<"Input the brightness level between 1-20 : ";
-    uint8_t level;
+    int level;
     cin>> level;
     for (int lin = 0; lin < height; ++lin)
     {
 
+
         for (int col = 0; col < width; ++col)
         {
-            image_modified[lin][col].blue=image[lin][col].blue+level;
-            image_modified[lin][col].green=image[lin][col].green+level;
-            image_modified[lin][col].red=image[lin][col].red+level;
-            if(image_modified[lin][col].blue > 255)
-                image_modified[lin][col].blue = 255;
 
-            if(image_modified[lin][col].green > 255)
-                image_modified[lin][col].green = 255;
+                    int b = image[lin][col].blue;
+                    b =b+min(level,(255-b));
 
-            if(image_modified[lin][col].red > 255)
-                image_modified[lin][col].red = 255;
+                   int r =  image[lin][col].red;
+                   r = r+min(level,(255-r));
 
+                  int g = image[lin][col].green;
+                  g = g+min(level,(255-g));
 
+                  image_modified[lin][col].blue=max(b,0);
+                  image_modified[lin][col].red=max(r,0);
+                  image_modified[lin][col].green=max(g,0);
         }
+
     }
 
 }

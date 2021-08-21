@@ -23,7 +23,7 @@ int options()
 void readImage(char ipath[100]){
 
     bmpImage = fopen(ipath, "rb");
-    viewInput(ipath);
+    viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,ipath);
     if (bmpImage == NULL)
     {
         printf("Error occured when opening file\n");

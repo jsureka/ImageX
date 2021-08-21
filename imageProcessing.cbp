@@ -40,6 +40,7 @@
 		<Unit filename="imageBlur.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="noiseGeneration.cpp" />
+		<Unit filename="saveImage.cpp" />
 		<Unit filename="sharpening.cpp" />
 		<Unit filename="showMainMenu.cpp" />
 		<Unit filename="smoothing.cpp" />

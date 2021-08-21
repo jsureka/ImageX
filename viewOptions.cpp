@@ -1,7 +1,7 @@
 #include"header.h";
 bool ifRead = false;
  bool ifOut = false;
-
+char input[100];
 void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
                 FILE *newBmpImage,FILE *bmpImage,int padding,pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width)
 {
@@ -11,19 +11,31 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     int gm;
     initwindow(heightOfScreen,widthOfScreen,"Options",-3,-3);
     settextstyle(BOLD_FONT,HORIZ_DIR,5);
-    // SetBkColor(GREEN);
 
     setcolor(14);
     //rectangle(500,100,900,200);
-    outtextxy(250,130,"Welcome to Image Processing System!");
+    outtextxy(450,130,"Welcome to ImageX!");
+
+   if(ifRead == false)
+   {
+        setcolor(10);
+    settextstyle(BOLD_FONT,HORIZ_DIR,4);
+    outtextxy(450,300,"Input an Image First!");
+   }
+   else
+   {
+        readimagefile(input,600,200,700,300);
+   }
+
     setcolor(3);
     settextstyle(BOLD_FONT,HORIZ_DIR,3);
-
     rectangle(80,400,300,450);
-    outtextxy(150,415,"TOOLS");
+
+    outtextxy(120,415,"INPUT IMAGE");
+    setbkcolor(BLACK);
 
     rectangle(400,400,600,450);
-    outtextxy(430,420,"INPUT IMAGE");
+    outtextxy(470,420,"TOOLS");
 
     rectangle(700,400,900,450);
     outtextxy(720,415,"OUTPUT IMAGE");
@@ -39,7 +51,6 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     delay(500);
     POINT position;
     bool flag=false;
-    std::cout<< "options"<<std::endl;
     while(1)
     {
         if(!flag) cout<< "in"<<endl;
@@ -55,7 +66,20 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     int x,y;
     x = position.x;
     y = position.y;
-    if(x>=100 && x<=300 && y>=400 && y<=470) //tools
+    if(x>=100 && x<=300 && y>=400 && y<=470) //input Image
+    {
+
+               closegraph();
+        delay(500);
+        ifRead = true;
+
+        cout<<"Enter the path of the image here : ";
+        scanf("%s",input);
+        readImage(input);
+
+    }
+
+    if(x>=400 && x<=600 && y>=400 && y<=470) //tools
     {
 
         if(ifRead == false)
@@ -72,18 +96,6 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         delay(500);
         ifOut = true;
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);
-
-    }
-
-    if(x>=400 && x<=600 && y>=400 && y<=470) //input image
-    {
-        closegraph();
-        delay(500);
-        ifRead = true;
-        char ipath[100];
-        cout<<"Enter the path of the image here : ";
-        scanf("%s",ipath);
-        readImage(ipath);
     }
 
     if(x>=700 && x<=900 && y>=400 && y<=470) //output image
@@ -100,7 +112,7 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         else
         {
             char s[100] = "image1.bmp";
-            viewInput(s);
+            viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
         }
         closegraph();
         viewOptions(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);

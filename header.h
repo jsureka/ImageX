@@ -46,7 +46,8 @@ typedef struct
     int randNum(void);
     void edgeDetection();
     void viewOptions();
-void viewInput(char*);
+void viewInput(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
+                FILE *newBmpImage,FILE *bmpImage, int width, int height, int padding, pixel image_modified[1000][1000],char*);
 void readImage(char ipath[100]);
 void greyscale(pixel temp[1000][1000], pixel outemp[1000][1000],int height, int width);
 void edgeDetection(pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width);
@@ -62,4 +63,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
                 FILE *newBmpImage,FILE *bmpImage,int padding,pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width);
 void writeImage(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
                 FILE *newBmpImage,FILE *bmpImage, int width, int height, int padding, pixel image_modified[1000][1000]
+);
+void saveImage(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
+                FILE *newBmpImage,FILE *bmpImage, int width, int height, int padding, pixel image_modified[1000][1000], char name[50]
 );
