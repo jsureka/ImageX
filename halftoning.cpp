@@ -5,7 +5,7 @@ void halftoning(pixel image[1000][1000],pixel image_modified[1000][1000],pixel i
 {
     greyscale(image,image_temp,height,width);
     int threshold;
-    cout<<"Enter Halftoning Threshold ( Standard - 128 ): ";
+    cout<<"Enter Halftoning Threshold between 0 to 255 ( Standard - 128 ): ";
     cin>>threshold;
 
     float c[2][3],sum_p,t;

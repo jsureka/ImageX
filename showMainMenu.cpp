@@ -19,10 +19,10 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     outtextxy(120,415,"Edge Detect");
 
     rectangle(400,400,600,450);
-    outtextxy(430,420,"Grey Scale");
+    outtextxy(430,415,"Grey Scale");
 
     rectangle(700,400,900,450);
-    outtextxy(760,415,"Smooth");
+    outtextxy(760,415,"Smoothen");
 
     rectangle(1000,400,1200,450);
     outtextxy(1050,415,"Brighten");
@@ -34,7 +34,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     outtextxy(440,500,"Noise");
 
     rectangle(700,480,900,530);
-    outtextxy(740,500,"Halftoning");
+    outtextxy(740,500,"Halftone");
 
     rectangle(1000,480,1200,530);
     outtextxy(1050,500,"Sharpen");
@@ -92,7 +92,7 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
 
     if(x>=700 && x<=900 && y>=400 && y<=470)//smooth
     {
-
+        closegraph();
         newBmpImage = fopen("image1.bmp", "wb");
         smoothing(image,image_temp,height,width);
         cout<<"Enter the smoothing threshold ( 2 - 10 ) : ";

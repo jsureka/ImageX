@@ -4,7 +4,7 @@
 void sharpen(pixel temp[1000][1000], pixel outemp[1000][1000],int height, int width)
 {
     int msk[3][3]= {{0,-1,0},
-        {-1,5,1},
+        {-1,5,-1},
         {0,-1,0}
     };
     for (int lin = 0; lin < height; ++lin)

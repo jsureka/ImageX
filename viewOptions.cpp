@@ -14,7 +14,7 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
 
     setcolor(14);
     //rectangle(500,100,900,200);
-    outtextxy(450,130,"Welcome to ImageX!");
+    outtextxy(450,130,"Welcome to ImageX");
 
    if(ifRead == false)
    {
@@ -35,13 +35,13 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     setbkcolor(BLACK);
 
     rectangle(400,400,600,450);
-    outtextxy(470,420,"TOOLS");
+    outtextxy(470,415,"TOOLS");
 
     rectangle(700,400,900,450);
-    outtextxy(720,415,"OUTPUT IMAGE");
+    outtextxy(710,415,"RECENT OUTPUT");
 
     rectangle(1000,400,1200,450);
-    outtextxy(1050,415,"ABOUT US");
+    outtextxy(1030,415,"USER MANUAL");
 
     rectangle(1000,550,1200,600);
     setcolor(RED);
@@ -53,7 +53,7 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     bool flag=false;
     while(1)
     {
-        if(!flag) cout<< "in"<<endl;
+       // if(!flag) cout<< "in"<<endl;
         flag=true;
         if(GetKeyState(VK_LBUTTON)&0x8000)
         {
@@ -69,14 +69,52 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     if(x>=100 && x<=300 && y>=400 && y<=470) //input Image
     {
 
-               closegraph();
+        closegraph();
         delay(500);
         ifRead = true;
+        while(1){
+             cout<<"Enter the path of the image here : ";
+            scanf("%s",input);
+            if(input[strlen(input)-1]!='p' || input[strlen(input)-2]!='m' || input[strlen(input)-3]!='b')
+            {
+                cout<<"Wrong File Format!(Input BMP file format)"<<endl;
+            }
+            else
+                break;
+        }
+        bmpImage = fopen(input, "rb");
+        if (bmpImage == NULL)
+        {
+            printf("Error occured when opening file\n");
+             cout<<"Enter the path of the image here : ";
+            scanf("%s",input);
+        }
+        fread(&myBmpFileHeader, sizeof(myBmpFileHeader), 1, bmpImage);
+        fread(&myBmpInfoHeader, sizeof(myBmpInfoHeader), 1, bmpImage);
 
-        cout<<"Enter the path of the image here : ";
-        scanf("%s",input);
-        readImage(input);
+        if (myBmpFileHeader.bitmapSignatureBytes[0]==0x42 && myBmpFileHeader.bitmapSignatureBytes[1]==0x4D && myBmpInfoHeader.dib_header_size == 40 && myBmpInfoHeader.bits_per_pixel == 24 && myBmpInfoHeader.compression ==0 )
+        {
+            printf("\nFile Format is BMP\n");
+        }
+        else
+        {
+            printf("Error\n");
+            printf("Error occured when opening file\n");
+            cout<<"Enter the path of the image here : ";
 
+        }
+        width = myBmpInfoHeader.width;
+        height = abs(myBmpInfoHeader.height);
+
+
+        for (int i = 0; i < height; ++i)
+        {
+            fread(image[i], sizeof(pixel), width, bmpImage);
+            fseek(bmpImage, padding, SEEK_CUR);
+
+        }
+         viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,input);
+        viewOptions(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);
     }
 
     if(x>=400 && x<=600 && y>=400 && y<=470) //tools
@@ -98,7 +136,7 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
         showMainMenu(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);
     }
 
-    if(x>=700 && x<=900 && y>=400 && y<=470) //output image
+    if(x>=700 && x<=900 && y>=400 && y<=470) //recent output
     {
         if(ifOut == false)
         {
@@ -108,22 +146,28 @@ void viewOptions(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
             outtextxy(100,100,"PlEASE EDIT AN IMAGE FIRST!");
             delay(2000);
             closegraph();
+        viewOptions(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);
         }
         else
         {
             char s[100] = "image1.bmp";
             viewInput(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage,  width,height,padding,image_modified,s);
+             closegraph();
+            viewOptions(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);
         }
-        closegraph();
-        viewOptions(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);
+
 
 
     }
 
-    if(x>=1000 && x<=1200 && y>=400 && y<=470)//about us
+    if(x>=1000 && x<=1200 && y>=400 && y<=470)//user manual
     {
          closegraph();
-        delay(500);
+         system("userManual.txt");
+         cout<<"Press Enter"<<endl;
+         getchar();
+        viewOptions(myBmpFileHeader,myBmpInfoHeader, newBmpImage,bmpImage, padding, image,image_modified,image_temp,height,width);
+
     }
 
     if(x>=1000 && x<=1200 && y>=550 && y<=650)//exit

@@ -2,45 +2,48 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="brightening.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="327" topLine="0" />
+		<Cursor1 position="181" topLine="0" />
 	</File>
 	<File name="edgeDetection.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="0" topLine="15" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="greyScale.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="halftoning.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="0" topLine="20" />
+	<File name="halftoning.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="header.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="88" topLine="0" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="imageBlur.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="0" topLine="37" />
+	<File name="imageBlur.cpp" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="674" topLine="0" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="noiseGeneration.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="182" topLine="0" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="saveImage.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="283" topLine="0" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="sharpening.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="895" topLine="15" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="showMainMenu.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="6687" topLine="9" />
+	<File name="showMainMenu.cpp" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="6121" topLine="141" />
+	</File>
+	<File name="smoothing.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="viewImage.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="393" topLine="0" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
-	<File name="viewOptions.cpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="897" topLine="9" />
+	<File name="viewOptions.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor1 position="0" topLine="0" />
 	</File>
 	<File name="writeImage.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor1 position="18" topLine="0" />
+		<Cursor1 position="0" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

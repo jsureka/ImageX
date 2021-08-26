@@ -37,7 +37,7 @@
 
 1583830049 c:\users\jitesh sureka\desktop\imageprocessing\spl1\myheader2.h
 
-1629488185 source:c:\users\jitesh\desktop\spl1\main.cpp
+1630003323 source:c:\users\jitesh\desktop\spl1\main.cpp
 	"header.h"
 
 1583601175 c:\users\jitesh\desktop\spl1\myheader2.h
@@ -83,25 +83,25 @@
 1624801500 source:c:\users\jitesh\desktop\spl1\smoothing.cpp
 	"header.h"
 
-1629578171 source:c:\users\jitesh\desktop\spl1\brightening.cpp
+1629964908 source:c:\users\jitesh\desktop\spl1\brightening.cpp
 	"header.h"
 
 1624802457 source:c:\users\jitesh\desktop\spl1\imageblur.cpp
 	"header.h"
 
-1629582631 source:c:\users\jitesh\desktop\spl1\noisegeneration.cpp
+1630002422 source:c:\users\jitesh\desktop\spl1\noisegeneration.cpp
 	"header.h"
 
-1624802891 source:c:\users\jitesh\desktop\spl1\halftoning.cpp
+1630002178 source:c:\users\jitesh\desktop\spl1\halftoning.cpp
 	"header.h"
 
-1629578909 source:c:\users\jitesh\desktop\spl1\sharpening.cpp
+1629671815 source:c:\users\jitesh\desktop\spl1\sharpening.cpp
 	"header.h"
 
-1629573911 source:c:\users\jitesh\desktop\spl1\showmainmenu.cpp
+1630002139 source:c:\users\jitesh\desktop\spl1\showmainmenu.cpp
 	"header.h"
 
-1629575704 source:c:\users\jitesh\desktop\spl1\viewoptions.cpp
+1630003322 source:c:\users\jitesh\desktop\spl1\viewoptions.cpp
 	"header.h"
 
 1627331802 source:c:\users\jitesh\desktop\spl1\writeimage.cpp

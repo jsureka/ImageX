@@ -2,7 +2,7 @@
 
 void brightening(pixel image[1000][1000],pixel image_modified[1000][1000],int height,int width)
 {
-    cout<<"Input the brightness level between 1-20 : ";
+    cout<<"Input the brightness level between -255 to +255 : ";
     int level;
     cin>> level;
     for (int lin = 0; lin < height; ++lin)
