@@ -1,14 +1,7 @@
-# Software Project Lab - 1 
-#ImageX
-Image Processing Tools Software
+# Imagex - Image Processing Tools Software
 
 Submitted by:
 Jitesh Sureka
-BSSE Roll Number: 1115
-Exam Roll: 1129
-BSSE Session: 2018 – 2019
-
-
 	
 Supervised By:
 Dr. Ahmedul Kabir
