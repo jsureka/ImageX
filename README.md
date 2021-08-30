@@ -1,31 +1,31 @@
 # Imagex - Image Processing Tools Software
 
 Submitted by:
-Jitesh Sureka
+Jitesh Sureka<br>
 	
 Supervised By:
-Dr. Ahmedul Kabir
-Designation: Assistant Professor
-Institute of Information Technology
-University of Dhaka
+Dr. Ahmedul Kabir<br>
+Designation: Assistant Professor<br>
+Institute of Information Technology<br>
+University of Dhaka<br>
 
 
-ImageX is an image processing software that consists of a number of image processing tools. The tools in this software are helpful in editing an image very efficiently. The software also gives option to save the processed images to use the image for different purposes of the user. User can input a 24-bit bitmap image to the software and use the tools on it. I tried to implement eight image processing tools which are more often used in image processing related fields.
-The tools are : Edge Detection, Greyscale, Smoothing, Brightening, Blurring, Noise Generation, Image Halftoning and Sharpening. The results obtained are perfectly reusable and can also be re-used in the software to edit the edited image again.
+ImageX is an image processing software that consists of a number of image processing tools. The tools in this software are helpful in editing an image very efficiently. The software also gives option to save the processed images to use the image for different purposes of the user. User can input a 24-bit bitmap image to the software and use the tools on it. I tried to implement eight image processing tools which are more often used in image processing related fields.<br>
+The tools are : Edge Detection, Greyscale, Smoothing, Brightening, Blurring, Noise Generation, Image Halftoning and Sharpening. The results obtained are perfectly reusable and can also be re-used in the software to edit the edited image again.<br>
 
-This software is a small-scale implementation of a large image processing software that we often use in our regular life. Many more tools can be added to to the software to upscale the usage of software. 
+This software is a small-scale implementation of a large image processing software that we often use in our regular life. Many more tools can be added to to the software to upscale the usage of software. <br>
 
 The scopes of my project are: -
-	Creating an image processing system that takes an image as input and outputs an edited image 
-	Implementing the following image processing algorithms: -
-o	Edge Detection
-o	Grey Scaling
-o	Smoothing
-o	Brightening
-o	Blurring
-o	Noise Generation
-o	Halftoning
-o	Sharpening
+	Creating an image processing system that takes an image as input and outputs an edited image <br>
+	Implementing the following image processing algorithms: -<br>
+o	Edge Detection<br>
+o	Grey Scaling<br>
+o	Smoothing<br>
+o	Brightening<br>
+o	Blurring<br>
+o	Noise Generation<br>
+o	Halftoning<br>
+o	Sharpening<br>
 
 	Using C/C++ as a programming language to implement the given algorithms and processes
 	Using internal C libraries to complete the project (Avoid using any external library)
