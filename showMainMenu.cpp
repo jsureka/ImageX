@@ -48,10 +48,10 @@ void showMainMenu(bmpFileHeader myBmpFileHeader, bmpInfoHeader myBmpInfoHeader,
     delay(500);
     POINT position;
     bool flag=false;
-    std::cout<< "options"<<std::endl;
+    //std::cout<< "options"<<std::endl;
     while(1)
     {
-        if(!flag) cout<< "in"<<endl;
+        // if(!flag) cout<< "in"<<endl;
         flag=true;
         if(GetKeyState(VK_LBUTTON)&0x8000)
         {

@@ -106,10 +106,6 @@ void edgeDetection(pixel image[1000][1000],pixel image_modified[1000][1000],pixe
                     image_modified[lin][col].red = 0;
                 }
 
-
-
-
-
             }
             else    // bottom
             {
@@ -121,10 +117,6 @@ void edgeDetection(pixel image[1000][1000],pixel image_modified[1000][1000],pixe
 
 
             }
-
-
-
-
 
         }
 

@@ -1,5 +1,4 @@
 #include"header.h";
-
 float ep[1000][1000] = {0.0}, eg[1000][1000] = {0.0};
 void halftoning(pixel image[1000][1000],pixel image_modified[1000][1000],pixel image_temp[1000][1000],int height,int width)
 {
@@ -53,7 +52,13 @@ void halftoning(pixel image[1000][1000],pixel image_modified[1000][1000],pixel i
             } /* ends else t <= threshold */
         } /* ends loop over n columns */
     }
-
-
+    for(int i =0;i<1000;i++)
+    {
+        for(int j=0;j<1000;j++)
+        {
+            ep[i][j] = 0.0;
+            eg[i][j] = 0.0;
+        }
+    }
 }
 
